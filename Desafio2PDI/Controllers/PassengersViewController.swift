@@ -7,14 +7,19 @@
 
 import UIKit
 
-class PassengersViewController: UIViewController {
+protocol PassengersDelegate: AnyObject {
+    func didAddPassengers(_ passengers: [Passenger])
+}
 
+class PassengersViewController: UIViewController {
+    
     @IBOutlet weak var nameTf: UITextField!
     @IBOutlet weak var ageTf: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noPassangersLb: UILabel!
     
     var passengers: [Passenger] = []
+    weak var delegate: PassengersDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +29,6 @@ class PassengersViewController: UIViewController {
     }
     
     @IBAction func board(_ sender: UIButton) {
-            print("Botao embarcar pressionado")
-        
         // validacao do nome
         guard let name = nameTf.text, !name.isEmpty else {
             showAlert(message: "Por favor, preencha o nome")
@@ -42,11 +45,19 @@ class PassengersViewController: UIViewController {
             print("\(passenger.name) pode embarcar")
             passengers.append(passenger)
             tableView.reloadData()
+            nameTf.text = ""
+            ageTf.text = ""
             updateView()
         } else {
             showAlert(message: "\(passenger.name) nao pode embarcar porque é menor de idade")
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        delegate?.didAddPassengers(passengers)
+    }
+    
     // montagem do alerta
     func showAlert(message: String) {
         let alert = UIAlertController(title: "Alerta", message: message, preferredStyle: .alert)
@@ -54,7 +65,7 @@ class PassengersViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    
+    // se a lista de passageiros estiver vazia mostra label, se nao a tableview de passengers
     func updateView(){
         if passengers.isEmpty {
             tableView.isHidden = true
