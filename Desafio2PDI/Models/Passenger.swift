@@ -10,4 +10,8 @@ import Foundation
 struct Passenger {
     let name: String
     let age: Int
+    
+    func isAdult() -> Bool {
+        return age >= 18
+    }
 }

@@ -9,21 +9,18 @@ import UIKit
 
 class FlightViewController: UIViewController {
 
+    @IBOutlet weak var fromCityTf: UITextField!
+    @IBOutlet weak var toCityTf: UITextField!
+    @IBOutlet weak var outboundDateTf: UITextField!
+    @IBOutlet weak var inboundDateTf: UITextField!
+    @IBOutlet weak var capacityTf: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func takeOff(_ sender: UIButton) {
     }
-    */
-
+    
 }
