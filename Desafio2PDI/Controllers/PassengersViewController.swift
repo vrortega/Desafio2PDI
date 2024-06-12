@@ -77,7 +77,7 @@ class PassengersViewController: UIViewController {
     }
 }
 
-extension PassengersViewController: UITableViewDataSource, UITableViewDelegate {
+extension PassengersViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return passengers.count
     }
@@ -90,9 +90,23 @@ extension PassengersViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+}
+
+
+extension PassengersViewController: UITableViewDelegate {
+    
     // Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let passenger = passengers[indexPath.row]
         print("\(passenger.name) selecionado")
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            passengers.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            updateView()
+            delegate?.didAddPassengers(passengers)
+        }
     }
 }
