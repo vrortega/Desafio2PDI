@@ -26,9 +26,18 @@ class PassengersViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         updateView()
+        
+        // ao clicar na tela, esconde o teclado
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func hideKeyBoard() {
+        view.endEditing(true)
     }
     
     @IBAction func board(_ sender: UIButton) {
+        hideKeyBoard()
         // validacao do nome
         guard let name = nameTf.text, !name.isEmpty else {
             showAlert(message: "Por favor, preencha o nome")
@@ -101,6 +110,7 @@ extension PassengersViewController: UITableViewDelegate {
         print("\(passenger.name) selecionado")
     }
     
+    // deleta passenger na tableview
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             passengers.remove(at: indexPath.row)
