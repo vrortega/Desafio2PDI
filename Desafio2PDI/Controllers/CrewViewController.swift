@@ -154,4 +154,13 @@ extension CrewViewController: UITableViewDelegate {
         let crewMember = crewMembers[indexPath.row]
         print("\(crewMembers) selecionado")
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            crewMembers.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            updateView()
+            delegate?.didAddCrew(crew: crewMembers)
+        }
+    }
 }
