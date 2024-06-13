@@ -45,6 +45,13 @@ class CrewViewController: UIViewController {
         experienceStepper.addTarget(self, action: #selector(stepperChanged(_:)), for: .valueChanged)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateView()
+    }
+    
+    
+    
     func initializeComponents() {
         experienceLb.text = "Experiencia: \(experienceYears) anos"
         experienceStepper.isEnabled = true

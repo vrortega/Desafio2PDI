@@ -17,7 +17,7 @@ struct Pilot {
     }
     
     func isPilot() -> Bool {
-        return experience > 10
+        return experience > 5
     }
 }
 
