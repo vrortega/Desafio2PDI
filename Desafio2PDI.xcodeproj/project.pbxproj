@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4E2042862C17AF4B00001F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E8884C82C17601A00D9FBC5 /* Assets.xcassets */; };
 		4E6019292C1B245F0017F9ED /* FlightAttendant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6019282C1B245F0017F9ED /* FlightAttendant.swift */; };
+		4E60192B2C1B6B440017F9ED /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E60192A2C1B6B440017F9ED /* Flight.swift */; };
 		4E8884C02C17601400D9FBC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8884BF2C17601400D9FBC5 /* AppDelegate.swift */; };
 		4E8884C22C17601400D9FBC5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8884C12C17601400D9FBC5 /* SceneDelegate.swift */; };
 		4E8884C42C17601400D9FBC5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8884C32C17601400D9FBC5 /* ViewController.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		4E6019282C1B245F0017F9ED /* FlightAttendant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightAttendant.swift; sourceTree = "<group>"; };
+		4E60192A2C1B6B440017F9ED /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
 		4E8884BC2C17601400D9FBC5 /* Desafio2PDI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Desafio2PDI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E8884BF2C17601400D9FBC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E8884C12C17601400D9FBC5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,9 +94,10 @@
 		4E8884D62C17649000D9FBC5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4EF60B872C1A40FC00ADA5C8 /* Pilot.swift */,
 				4E8884D42C17647F00D9FBC5 /* Passenger.swift */,
+				4EF60B872C1A40FC00ADA5C8 /* Pilot.swift */,
 				4E6019282C1B245F0017F9ED /* FlightAttendant.swift */,
+				4E60192A2C1B6B440017F9ED /* Flight.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				4E8884C42C17601400D9FBC5 /* ViewController.swift in Sources */,
 				4EFEBD902C17E7E900418204 /* CrewViewController.swift in Sources */,
 				4EFEBD8E2C17E7C600418204 /* PassengersViewController.swift in Sources */,
+				4E60192B2C1B6B440017F9ED /* Flight.swift in Sources */,
 				4E6019292C1B245F0017F9ED /* FlightAttendant.swift in Sources */,
 				4E8884C02C17601400D9FBC5 /* AppDelegate.swift in Sources */,
 				4E8884D52C17647F00D9FBC5 /* Passenger.swift in Sources */,

@@ -271,6 +271,7 @@
                     <navigationItem key="navigationItem" title="Novo Voo" id="Sad-bN-rGg"/>
                     <connections>
                         <outlet property="capacityTf" destination="ysX-TO-XpN" id="d6Y-pj-afC"/>
+                        <outlet property="fromCityTf" destination="boB-jd-qka" id="Dq4-8j-56c"/>
                         <outlet property="inboundDateTf" destination="yW2-JR-hsq" id="1Po-GP-PTU"/>
                         <outlet property="numberOfCrewLb" destination="n5G-vB-xyj" id="U65-XN-63R"/>
                         <outlet property="numberOfPassengersLb" destination="eg7-76-TWv" id="s7G-nd-o3a"/>
