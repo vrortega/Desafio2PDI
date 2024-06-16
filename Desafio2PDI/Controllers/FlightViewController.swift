@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol FlightViewControllerDelegate {
+    func didAddFlight(flight: Flight)
+}
+
 class FlightViewController: UIViewController {
     
     @IBOutlet weak var fromCityTf: UITextField!
@@ -31,18 +35,22 @@ class FlightViewController: UIViewController {
         }
     }
     
+    var delegate: FlightViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        fromCityTf.delegate = self
+        toCityTf.delegate = self
     }
     
     @IBAction func takeOff(_ sender: UIButton) {
-        guard let fromCity = fromCityTf.text, !fromCity.isEmpty else {
-            showAlert(message: "Por favor, preencha a cidade de origem")
+        guard let fromCity = fromCityTf.text, fromCity.count == 3 else {
+            showAlert(message: "Por favor, preencha a cidade de origem em apenas 3 caracteres")
             return
         }
         
-        guard let toCity = toCityTf.text, !toCity.isEmpty else {
-            showAlert(message: "Por favor, preencha a cidade de destino")
+        guard let toCity = toCityTf.text, toCity.count == 3 else {
+            showAlert(message: "Por favor, preencha a cidade de destino em apenas 3 caracteres")
             return
         }
         
@@ -51,10 +59,8 @@ class FlightViewController: UIViewController {
             return
         }
         
-        guard let inboundDate = inboundDateTf.text, !inboundDate.isEmpty else {
-            showAlert(message: "Por favor, preencha a data de volta")
-            return
-        }
+       let inboundDate = inboundDateTf.text!
+
         
         guard let capacityText = capacityTf.text, !capacityText.isEmpty, let capacity = Int(capacityText) else {
             showAlert(message: "Por favor, preencha a capacidade do voo")
@@ -101,8 +107,11 @@ class FlightViewController: UIViewController {
         let flight = Flight(fromCity: fromCity, toCity: toCity, outboundDate: outboundDate, inboundDate: inboundDate, capacity: capacity, passengers: flightPassengers, crew: flightCrew)
         flights.append(flight)
         
+        delegate?.didAddFlight(flight: flight)
+        
         showAlert(message: "Embarque feito com sucesso")
         resetFields()
+        dismiss(animated: true, completion: nil)
         
     }
     
@@ -154,7 +163,14 @@ extension FlightViewController: PassengersDelegate {
 extension FlightViewController: CrewDelegate {
     func didAddCrew(crew: [Any]) {
         self.flightCrew = crew
-        
     }
 }
 
+extension FlightViewController: UITextFieldDelegate {
+    func textfield(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else {return false}
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        return updatedText.count <= 3
+    }
+}
