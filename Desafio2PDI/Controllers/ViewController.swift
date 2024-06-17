@@ -69,7 +69,6 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedFlight = flights[indexPath.row]
         performSegue(withIdentifier: "showFlightDetails", sender: selectedFlight)
-        print("Cliquei na view")
     }
 }
 

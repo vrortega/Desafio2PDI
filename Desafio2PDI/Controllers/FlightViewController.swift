@@ -48,29 +48,29 @@ class FlightViewController: UIViewController {
             showAlert(message: "Por favor, preencha a cidade de origem em apenas 3 caracteres")
             return
         }
-        
+
         guard let toCity = toCityTf.text, toCity.count == 3 else {
             showAlert(message: "Por favor, preencha a cidade de destino em apenas 3 caracteres")
             return
         }
-        
+
         guard let outboundDate = outboundDateTf.text, !outboundDate.isEmpty else {
             showAlert(message: "Por favor, preencha a data de ida")
             return
         }
-        
+
        let inboundDate = inboundDateTf.text!
 
-        
+
         guard let capacityText = capacityTf.text, !capacityText.isEmpty, let capacity = Int(capacityText) else {
             showAlert(message: "Por favor, preencha a capacidade do voo")
             return
         }
-    
+
         var pilotCount = 0
         var coPilotCount = 0
         var flightAttendantCount = 0
-        
+
         for crewMember in flightCrew {
             if crewMember is Pilot {
                 pilotCount += 1
@@ -80,39 +80,39 @@ class FlightViewController: UIViewController {
                 flightAttendantCount += 1
             }
         }
-        
+
         if pilotCount != 1 {
             showAlert(message: "É necessário ter exatamente 1 piloto")
             return
         }
-        
+
         if coPilotCount != 1 {
             showAlert(message: "É necessário ter exatamente 1 co-piloto")
             return
         }
-        
+
         if flightAttendantCount > 3 {
             showAlert(message: "O voo só pode ter 3 comissários")
             return
         }
-        
-        
+
+
         let totalPeople = flightPassengers.count + flightCrew.count
         if totalPeople > capacity {
             showAlert(message: "A capacidade do voo foi excedida")
             return
         }
-        
-        
+
+
         let flight = Flight(fromCity: fromCity, toCity: toCity, outboundDate: outboundDate, inboundDate: inboundDate, capacity: capacity, passengers: flightPassengers, crew: flightCrew)
         flights.append(flight)
-        
+
         delegate?.didAddFlight(flight: flight)
-        
+
         showAlert(message: "Embarque feito com sucesso")
         resetFields()
-        dismiss(animated: true, completion: nil)
-        
+
+        self.navigationController?.popViewController(animated: true)
     }
     
     
