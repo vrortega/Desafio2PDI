@@ -108,10 +108,9 @@ class FlightViewController: UIViewController {
         flights.append(flight)
 
         delegate?.didAddFlight(flight: flight)
-
-        showAlert(message: "Embarque feito com sucesso")
+        // MARK: popViewController só funciona se showAlert desativado
+        //showAlert(message: "Embarque feito com sucesso")
         resetFields()
-
         self.navigationController?.popViewController(animated: true)
     }
     

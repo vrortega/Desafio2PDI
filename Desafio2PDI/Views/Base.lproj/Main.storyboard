@@ -246,13 +246,13 @@
                     <connections>
                         <outlet property="capacity" destination="Way-SC-XfN" id="U2S-sd-LvN"/>
                         <outlet property="coPilot" destination="wPA-an-wDf" id="f21-SM-xVw"/>
+                        <outlet property="flightAttendant" destination="xKx-SK-YZd" id="HDt-Nz-lmN"/>
                         <outlet property="fromCity" destination="eOt-wi-Jdt" id="Byd-V8-1Ea"/>
                         <outlet property="inboundDate" destination="KnQ-sg-tZC" id="RD3-G0-I0g"/>
                         <outlet property="outboundDate" destination="Tp2-0U-Waz" id="K4J-iB-T6p"/>
+                        <outlet property="passengers" destination="pI2-iq-ZC5" id="g6z-9m-Dvy"/>
                         <outlet property="pilot" destination="LKN-E6-uuE" id="oKq-x1-YoF"/>
                         <outlet property="toCity" destination="SUb-7p-mBZ" id="HC2-0u-Kzn"/>
-                        <outletCollection property="allPassengers" destination="pI2-iq-ZC5" collectionClass="NSMutableArray" id="bvO-RU-o5R"/>
-                        <outletCollection property="allFlightAttendants" destination="xKx-SK-YZd" collectionClass="NSMutableArray" id="s5R-0l-AXF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="okn-bz-17h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
