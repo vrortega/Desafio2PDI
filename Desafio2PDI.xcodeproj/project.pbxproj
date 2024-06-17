@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E16427D2C1FB81D00492989 /* FlightDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E16427C2C1FB81D00492989 /* FlightDetailsViewController.swift */; };
 		4E2042862C17AF4B00001F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E8884C82C17601A00D9FBC5 /* Assets.xcassets */; };
 		4E6019292C1B245F0017F9ED /* FlightAttendant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6019282C1B245F0017F9ED /* FlightAttendant.swift */; };
 		4E60192B2C1B6B440017F9ED /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E60192A2C1B6B440017F9ED /* Flight.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E16427C2C1FB81D00492989 /* FlightDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightDetailsViewController.swift; sourceTree = "<group>"; };
 		4E6019282C1B245F0017F9ED /* FlightAttendant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightAttendant.swift; sourceTree = "<group>"; };
 		4E60192A2C1B6B440017F9ED /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
 		4E8884BC2C17601400D9FBC5 /* Desafio2PDI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Desafio2PDI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 				4EFEBD8F2C17E7E900418204 /* CrewViewController.swift */,
 				4EFEBD8D2C17E7C600418204 /* PassengersViewController.swift */,
 				4E8884C32C17601400D9FBC5 /* ViewController.swift */,
+				4E16427C2C1FB81D00492989 /* FlightDetailsViewController.swift */,
 				4E8884D72C1772D700D9FBC5 /* FlightViewController.swift */,
 			);
 			path = Controllers;
@@ -194,6 +197,7 @@
 				4E8884C42C17601400D9FBC5 /* ViewController.swift in Sources */,
 				4EFEBD902C17E7E900418204 /* CrewViewController.swift in Sources */,
 				4EFEBD8E2C17E7C600418204 /* PassengersViewController.swift in Sources */,
+				4E16427D2C1FB81D00492989 /* FlightDetailsViewController.swift in Sources */,
 				4E60192B2C1B6B440017F9ED /* Flight.swift in Sources */,
 				4E6019292C1B245F0017F9ED /* FlightAttendant.swift in Sources */,
 				4E8884C02C17601400D9FBC5 /* AppDelegate.swift in Sources */,

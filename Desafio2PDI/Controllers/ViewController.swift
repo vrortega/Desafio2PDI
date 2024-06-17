@@ -18,12 +18,15 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         updateNoFlightLabel()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "FlightCell")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowFlight", let flightVC = segue.destination as? FlightViewController {
             flightVC.delegate = self
+        } else if segue.identifier == "showFlightDetails", let flightDetailsVC = segue.destination as? FlightDetailsViewController {
+            if let flight = sender as? Flight {
+                flightDetailsVC.flight = flight
+            }
         }
     }
     
@@ -41,9 +44,17 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FlightCell", for: indexPath)
+        
         let flight = flights[indexPath.row]        
         cell.textLabel?.text = "\(flight.fromCity) - \(flight.toCity)"
-        cell.detailTextLabel?.text = "Ida: \(flight.inboundDate) - Volta: \(flight.outboundDate) | \(flight.capacity) passageiro(s)"
+        cell.detailTextLabel?.text = "Ida: \(flight.outboundDate) - Volta: \(flight.inboundDate) | \(flight.passengers.count) passageiro(s)"
+        
+        if cell.detailTextLabel == nil {
+            print("detailTextLabel is nil")
+        } else {
+            print("detailTextLabel is working")
+        }
+        
         return cell
     }
     
@@ -53,6 +64,12 @@ extension ViewController: UITableViewDataSource {
             updateNoFlightLabel()
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedFlight = flights[indexPath.row]
+        performSegue(withIdentifier: "showFlightDetails", sender: selectedFlight)
+        print("Cliquei na view")
     }
 }
 
