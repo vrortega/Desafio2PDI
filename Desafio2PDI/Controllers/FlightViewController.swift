@@ -15,8 +15,8 @@ class FlightViewController: UIViewController {
     
     @IBOutlet weak var fromCityTf: UITextField!
     @IBOutlet weak var toCityTf: UITextField!
-    @IBOutlet weak var outboundDateTf: UITextField!
-    @IBOutlet weak var inboundDateTf: UITextField!
+    @IBOutlet weak var outboundDate: UIDatePicker!
+    @IBOutlet weak var inboundDate: UIDatePicker!
     @IBOutlet weak var capacityTf: UITextField!
     @IBOutlet weak var numberOfPassengersLb: UILabel!
     @IBOutlet weak var numberOfCrewLb: UILabel!
@@ -54,12 +54,8 @@ class FlightViewController: UIViewController {
             return
         }
 
-        guard let outboundDate = outboundDateTf.text, !outboundDate.isEmpty else {
-            showAlert(message: "Por favor, preencha a data de ida")
-            return
-        }
-
-       let inboundDate = inboundDateTf.text!
+        let outboundDate = formatDate(date: outboundDate.date)
+        let inboundDate = formatDate(date: inboundDate.date)
 
 
         guard let capacityText = capacityTf.text, !capacityText.isEmpty, let capacity = Int(capacityText) else {
@@ -135,12 +131,15 @@ class FlightViewController: UIViewController {
     func resetFields(){
         fromCityTf.text = ""
         toCityTf.text = ""
-        outboundDateTf.text = ""
-        inboundDateTf.text = ""
         capacityTf.text = ""
         flightPassengers.removeAll()
         flightCrew.removeAll()
-        
+    }
+    
+    func formatDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        return dateFormatter.string(from: date)
     }
     
     func showAlert(message: String){

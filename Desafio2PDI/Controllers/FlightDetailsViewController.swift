@@ -35,34 +35,35 @@ class FlightDetailsViewController: UIViewController {
         inboundDate.text = "\(flight.inboundDate)"
         capacity.text = "Passageiros | Capacidade: \(flight.capacity)"
         
-        let passengersText = flight.passengers.map{ $0.name }.joined(separator: ", ")
-        passengers.text = "\(passengersText)"
+        
+        var passengersText = ""
+        for passenger in flight.passengers {
+            passengersText += "\(passenger.name)"
+        }
+        passengers.text = passengersText
         
         var pilotText = "Piloto: nao disponivel"
         var coPilotText = "Co-Piloto: nao disponivel"
-        var flightAttendantsText = "Comissário: nao disponivel"
         
-        var flightAttendants: [String] = []
         
         for crewMember in flight.crew {
             if let pilot = crewMember as? Pilot {
                 pilotText = "\(pilot.name) - Piloto"
             } else if let coPilot = crewMember as? coPilot {
                 coPilotText = "\(coPilot.name) - Co-Piloto"
-            } else if let flightAttendant = crewMember as? FlightAttendant {
-                flightAttendants.append(flightAttendant.name)
             }
         }
-        if !flightAttendants.isEmpty {
-            flightAttendantsText = "Comissários: \(flightAttendants.joined(separator: ", "))"
-            
-            
-        }
-        
         pilot.text = pilotText
         coPilot.text = coPilotText
-        flightAttendant.text = flightAttendantsText
         
+        var flightAttendantsText = "Comissários: \n"
+        for crewMember in flight.crew {
+            if let flightAttendant = crewMember as? FlightAttendant {
+                flightAttendantsText += "\(flightAttendant.name)\n"
+            }
+        }
+        
+        flightAttendant.text = flightAttendantsText
     }
     
 }
