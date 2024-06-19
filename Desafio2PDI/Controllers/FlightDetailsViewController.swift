@@ -23,7 +23,6 @@ class FlightDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        
     }
     
     func updateUI() {
@@ -35,16 +34,12 @@ class FlightDetailsViewController: UIViewController {
         inboundDate.text = "\(flight.inboundDate)"
         capacity.text = "Passageiros | Capacidade: \(flight.capacity)"
         
-        
-        var passengersText = ""
-        for passenger in flight.passengers {
-            passengersText += "\(passenger.name)"
-        }
+        let passengersText = flight.passengers.map { $0.name }.joined(separator: "\n")
+        print("passageiros: \(passengersText)")
         passengers.text = passengersText
         
         var pilotText = "Piloto: nao disponivel"
         var coPilotText = "Co-Piloto: nao disponivel"
-        
         
         for crewMember in flight.crew {
             if let pilot = crewMember as? Pilot {
@@ -52,18 +47,17 @@ class FlightDetailsViewController: UIViewController {
             } else if let coPilot = crewMember as? coPilot {
                 coPilotText = "\(coPilot.name) - Co-Piloto"
             }
+            
+            var flightAttendantsText = flight.crew
+                .compactMap { $0 as? FlightAttendant }
+                .map { "\( $0.name ) - Comissário"}
+                .joined(separator: "\n")
+            print("tripulantes: \(flightAttendantsText)")
+
+            
+            pilot.text = pilotText
+            coPilot.text = coPilotText
+            flightAttendant.text = flightAttendantsText
         }
-        pilot.text = pilotText
-        coPilot.text = coPilotText
-        
-        var flightAttendantsText = "Comissários: \n"
-        for crewMember in flight.crew {
-            if let flightAttendant = crewMember as? FlightAttendant {
-                flightAttendantsText += "\(flightAttendant.name)\n"
-            }
-        }
-        
-        flightAttendant.text = flightAttendantsText
     }
-    
 }
