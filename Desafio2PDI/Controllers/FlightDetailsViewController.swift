@@ -45,8 +45,8 @@ class FlightDetailsViewController: UIViewController {
         
         fromCityLabel.text = "\(flight.fromCity)"
         toCityLabel.text = "\(flight.toCity)"
-        outboundDateLabel.text = "\(flight.outboundDate)"
-        inboundDateLabel.text = "\(flight.inboundDate)"
+        outboundDateLabel.text = "Ida:\(flight.outboundDate)"
+        inboundDateLabel.text = "Volta: \(flight.inboundDate)"
         capacityLabel.text = "Passageiros | Capacidade: \(flight.capacity)"
         
         let passengersText = flight.passengers.map { $0.name }.joined(separator: "\n")
@@ -62,7 +62,7 @@ class FlightDetailsViewController: UIViewController {
                 coPilotText = "\(coPilot.name) - Co-Piloto"
             }
             
-            var flightAttendantsText = flight.crew
+            let flightAttendantsText = flight.crew
                 .compactMap { $0 as? FlightAttendant }
                 .map { "\( $0.name ) - Comissário"}
                 .joined(separator: "\n")

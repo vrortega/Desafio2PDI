@@ -155,9 +155,6 @@ extension CrewViewController: UITableViewDataSource {
 }
 
 extension CrewViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let crewMember = crewMembers[indexPath.row]
-    }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
