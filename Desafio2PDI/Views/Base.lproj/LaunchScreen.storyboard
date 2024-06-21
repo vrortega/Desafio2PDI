@@ -16,13 +16,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Maxtrip" translatesAutoresizingMaskIntoConstraints="NO" id="6va-26-o4h">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Maxtrip" translatesAutoresizingMaskIntoConstraints="NO" id="6va-26-o4h">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RhS-cz-giU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6va-26-o4h" firstAttribute="leading" secondItem="RhS-cz-giU" secondAttribute="leading" id="Tzd-i0-eEf"/>
+                            <constraint firstItem="6va-26-o4h" firstAttribute="top" secondItem="2mI-zl-pt2" secondAttribute="top" id="v8K-gx-I0c"/>
+                            <constraint firstItem="6va-26-o4h" firstAttribute="trailing" secondItem="RhS-cz-giU" secondAttribute="trailing" id="ykY-O7-zoV"/>
+                            <constraint firstAttribute="bottom" secondItem="6va-26-o4h" secondAttribute="bottom" id="zkC-t4-EbH"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d9O-Yk-gf1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -31,7 +36,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Maxtrip" width="960" height="1704"/>
+        <image name="Maxtrip" width="320" height="568"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
