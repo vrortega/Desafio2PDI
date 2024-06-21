@@ -26,13 +26,12 @@ Este projeto é um aplicativo de gerenciamento de voos desenvolvido em Swift par
 ## 🎯 Finalidade do Projeto
 A finalidade deste projeto é fornecer uma ferramenta prática para o gerenciamento de voos. Ele permite:
 
-- Adicionar Voos: Criação de novos voos especificando cidades de origem e destino, datas de ida e volta, capacidade e tripulação.
-- Gerenciar Passageiros: Adicionar, visualizar e remover passageiros, garantindo que todos sejam adultos.
-- Gerenciar Tripulação: Adicionar, visualizar e remover membros da tripulação, incluindo pilotos, co-pilotos e comissários de bordo.
-- Visualizar Detalhes dos Voos: Exibir todas as informações relevantes sobre um voo específico, incluindo passageiros e tripulação.
+- <b>Adicionar Voos:</b> Criação de novos voos especificando cidades de origem e destino, datas de ida e volta, capacidade e tripulação.
+- <b>Gerenciar Passageiros:</b> Adicionar, visualizar e remover passageiros, garantindo que todos sejam adultos.
+- <b>Gerenciar Tripulação:</b> Adicionar, visualizar e remover membros da tripulação, incluindo pilotos, co-pilotos e comissários de bordo.
+- <b>Visualizar Detalhes dos Voos:</b> Exibir todas as informações relevantes sobre um voo específico, incluindo passageiros e tripulação.
 
 ## 🚀 Como Rodar
-Para rodar o projeto Campeões da Copa no seu ambiente local, siga os passos abaixo:
 
 ### Clone o repositório:
 
