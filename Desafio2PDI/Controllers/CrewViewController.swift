@@ -12,12 +12,17 @@ protocol CrewDelegate: AnyObject {
 }
 
 class CrewViewController: UIViewController {
-    @IBOutlet weak var CrewTypeSc: UISegmentedControl!
-    @IBOutlet weak var nameTf: UITextField!
-    @IBOutlet weak var experienceLb: UILabel!
+    @IBOutlet weak var CrewTypeSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var experienceLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var experienceStepper: UIStepper!
-    @IBOutlet weak var noCrewLb: UILabel!
+    @IBOutlet weak var noCrewLabel: UILabel!
+    @IBOutlet weak var toBoardbutton: UIButton! {
+        didSet {
+            toBoardbutton.layer.cornerRadius = 10
+        }
+    }
     
     var experienceYears: Int = 0
     var crewMembers: [Any] = [] {
@@ -34,14 +39,12 @@ class CrewViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-       
-        
         
         // configuracao inicial
         initializeComponents()
         
         // adiciona acao para o segmentedcontrol e uistepper
-        CrewTypeSc.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
+        CrewTypeSegmentedControl.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
         experienceStepper.addTarget(self, action: #selector(stepperChanged(_:)), for: .valueChanged)
     }
     
@@ -50,31 +53,29 @@ class CrewViewController: UIViewController {
         updateView()
     }
     
-    
-    
     func initializeComponents() {
-        experienceLb.text = "Experiencia: \(experienceYears) anos"
+        experienceLabel.text = "Experiencia: \(experienceYears) anos"
         experienceStepper.isEnabled = true
-        experienceLb.isEnabled = true
+        experienceLabel.isEnabled = true
     }
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            experienceLb.isEnabled = true
+            experienceLabel.isEnabled = true
             experienceStepper.isEnabled = true
             updateExperienceLabel()
         } else {
-            experienceLb.isEnabled = false
+            experienceLabel.isEnabled = false
             experienceStepper.isEnabled = false
-            experienceLb.text = "Experiencia minima nao requerida"
+            experienceLabel.text = "Experiencia minima nao requerida"
         }
     }
     
     func updateExperienceLabel() {
-        if CrewTypeSc.selectedSegmentIndex == 0 {
-            experienceLb.text = "Experiencia: \(experienceYears) anos"
+        if CrewTypeSegmentedControl.selectedSegmentIndex == 0 {
+            experienceLabel.text = "Experiencia: \(experienceYears) anos"
         } else {
-            experienceLb.text = "Experiencia minima nao requerida"
+            experienceLabel.text = "Experiencia minima nao requerida"
         }
     }
     
@@ -83,36 +84,33 @@ class CrewViewController: UIViewController {
         updateExperienceLabel()
     }
     
-        @IBAction func board(_ sender: UIButton) {
-            guard let name = nameTf.text, !name.isEmpty else {
-                showAlert(message: "Por favor, preencha o nome")
-                return
-            }
-            if CrewTypeSc.selectedSegmentIndex == 0 {
-                let pilot = Pilot(name: name, experience: experienceYears)
-                if pilot.isPilot() {
-                    crewMembers.append(pilot)
-                    print("Piloto \(pilot.name) foi adicionado com \(pilot.experience) anos de experiencia")
-                } else {
-                    let coPilot = coPilot(name: name, experience: experienceYears)
-                    crewMembers.append(coPilot)
-                    print("Co-piloto \(coPilot.name) adicionado com \(coPilot.experience) anos de experiencia")
-                }
-            } else {
-                let flightAttendant = FlightAttendant(name: name)
-                crewMembers.append(flightAttendant)
-                print("Comissario \(name) adicionado")
-            }
-            
-            tableView.reloadData()
-            nameTf.text = ""
-            experienceStepper.value = 0
-            experienceYears = 0
-            updateExperienceLabel()
-            
-            delegate?.didAddCrew(crew: crewMembers)
-        
+    @IBAction func board(_ sender: UIButton) {
+        guard let name = nameTextField.text, !name.isEmpty else {
+            showAlert(message: "Por favor, preencha o nome")
+            return
         }
+        if CrewTypeSegmentedControl.selectedSegmentIndex == 0 {
+            let pilot = Pilot(name: name, experience: experienceYears)
+            if pilot.isPilot() {
+                crewMembers.append(pilot)
+            } else {
+                let coPilot = coPilot(name: name, experience: experienceYears)
+                crewMembers.append(coPilot)
+            }
+        } else {
+            let flightAttendant = FlightAttendant(name: name)
+            crewMembers.append(flightAttendant)
+        }
+        
+        tableView.reloadData()
+        nameTextField.text = ""
+        experienceStepper.value = 0
+        experienceYears = 0
+        updateExperienceLabel()
+        
+        delegate?.didAddCrew(crew: crewMembers)
+        
+    }
     
     func showAlert(message: String){
         let alert = UIAlertController(title: "Alerta", message: message, preferredStyle: .alert)
@@ -123,14 +121,14 @@ class CrewViewController: UIViewController {
     func updateView() {
         if crewMembers.isEmpty {
             tableView.isHidden = true
-            noCrewLb.isHidden = true
+            noCrewLabel.isHidden = true
         } else {
             tableView.isHidden = false
-            noCrewLb.isHidden = false
+            noCrewLabel.isHidden = false
         }
     }
-
-    }
+    
+}
 
 extension CrewViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -159,7 +157,6 @@ extension CrewViewController: UITableViewDataSource {
 extension CrewViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let crewMember = crewMembers[indexPath.row]
-        print("\(crewMembers) selecionado")
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

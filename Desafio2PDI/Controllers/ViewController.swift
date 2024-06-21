@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var noFlight: UILabel!
+    @IBOutlet weak var noFlightLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     var flights: [Flight] = []
@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     }
     
     func updateNoFlightLabel(){
-        noFlight.isHidden = !flights.isEmpty
+        noFlightLabel.isHidden = !flights.isEmpty
         tableView.isHidden = flights.isEmpty
     }
 }
@@ -48,13 +48,7 @@ extension ViewController: UITableViewDataSource {
         let flight = flights[indexPath.row]        
         cell.textLabel?.text = "\(flight.fromCity) - \(flight.toCity)"
         cell.detailTextLabel?.text = "Ida: \(flight.outboundDate) - Volta: \(flight.inboundDate) | \(flight.passengers.count) passageiro(s)"
-        
-        if cell.detailTextLabel == nil {
-            print("detailTextLabel is nil")
-        } else {
-            print("detailTextLabel is working")
-        }
-        
+
         return cell
     }
     

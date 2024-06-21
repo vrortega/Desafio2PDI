@@ -13,10 +13,15 @@ protocol PassengersDelegate: AnyObject {
 
 class PassengersViewController: UIViewController {
     
-    @IBOutlet weak var nameTf: UITextField!
-    @IBOutlet weak var ageTf: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var ageTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var noPassangersLb: UILabel!
+    @IBOutlet weak var noPassangersLabel: UILabel!
+    @IBOutlet weak var toBoardButton: UIButton! {
+        didSet {
+            toBoardButton.layer.cornerRadius = 10
+        }
+    }
     
     var passengers: [Passenger] = []
     weak var delegate: PassengersDelegate?
@@ -38,24 +43,20 @@ class PassengersViewController: UIViewController {
     
     @IBAction func board(_ sender: UIButton) {
         hideKeyBoard()
-        // validacao do nome
-        guard let name = nameTf.text, !name.isEmpty else {
+        guard let name = nameTextField.text, !name.isEmpty else {
             showAlert(message: "Por favor, preencha o nome")
             return
         }
-        // validacao da idade
-        guard let ageText = ageTf.text, !ageText.isEmpty, let age = Int(ageText) else {
+        guard let ageText = ageTextField.text, !ageText.isEmpty, let age = Int(ageText) else {
             showAlert(message: "Por favor, preencha uma idade válida")
             return
         }
-        // logica para permitir embarque do passageiro
         let passenger = Passenger(name: name, age: age)
         if passenger.isAdult() {
-            print("\(passenger.name) pode embarcar")
             passengers.append(passenger)
             tableView.reloadData()
-            nameTf.text = ""
-            ageTf.text = ""
+            nameTextField.text = ""
+            ageTextField.text = ""
             updateView()
         } else {
             showAlert(message: "\(passenger.name) nao pode embarcar porque é menor de idade")
@@ -74,14 +75,13 @@ class PassengersViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    // se a lista de passageiros estiver vazia mostra label, se nao a tableview de passengers
     func updateView(){
         if passengers.isEmpty {
             tableView.isHidden = true
-            noPassangersLb.isHidden = false
+            noPassangersLabel.isHidden = false
         } else {
             tableView.isHidden = false
-            noPassangersLb.isHidden = true
+            noPassangersLabel.isHidden = true
         }
     }
 }
@@ -98,16 +98,12 @@ extension PassengersViewController: UITableViewDataSource {
         cell.detailTextLabel?.text = "Idade \(passenger.age)"
         return cell
     }
-    
 }
 
 
 extension PassengersViewController: UITableViewDelegate {
-    
-    // Delegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let passenger = passengers[indexPath.row]
-        print("\(passenger.name) selecionado")
     }
     
     // deleta passenger na tableview

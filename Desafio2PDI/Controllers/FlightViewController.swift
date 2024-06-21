@@ -20,6 +20,21 @@ class FlightViewController: UIViewController {
     @IBOutlet weak var capacityTf: UITextField!
     @IBOutlet weak var numberOfPassengersLb: UILabel!
     @IBOutlet weak var numberOfCrewLb: UILabel!
+    @IBOutlet weak var takeOffButton: UIButton! {
+        didSet {
+            takeOffButton.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var passengersView: UIView! {
+        didSet {
+            passengersView.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var crewView: UIView! {
+        didSet {
+            crewView.layer.cornerRadius = 10
+        }
+    }
     
     var flights: [Flight] = []
     
@@ -41,6 +56,22 @@ class FlightViewController: UIViewController {
         super.viewDidLoad()
         fromCityTf.delegate = self
         toCityTf.delegate = self
+        
+        
+        let passengersTapGesture = UITapGestureRecognizer(target: self, action: #selector(passengersViewTapped))
+        passengersView.addGestureRecognizer(passengersTapGesture)
+        
+        
+        let crewTapGesture = UITapGestureRecognizer(target: self, action: #selector(crewViewTapped))
+        crewView.addGestureRecognizer(crewTapGesture)
+    }
+    
+    @objc func passengersViewTapped() {
+        performSegue(withIdentifier: "showPassengers", sender: self)
+    }
+    
+    @objc func crewViewTapped() {
+        performSegue(withIdentifier: "showCrew", sender: self)
     }
     
     @IBAction func takeOff(_ sender: UIButton) {
@@ -48,25 +79,25 @@ class FlightViewController: UIViewController {
             showAlert(message: "Por favor, preencha a cidade de origem em apenas 3 caracteres")
             return
         }
-
+        
         guard let toCity = toCityTf.text, toCity.count == 3 else {
             showAlert(message: "Por favor, preencha a cidade de destino em apenas 3 caracteres")
             return
         }
-
+        
         let outboundDate = formatDate(date: outboundDate.date)
         let inboundDate = formatDate(date: inboundDate.date)
-
-
+        
+        
         guard let capacityText = capacityTf.text, !capacityText.isEmpty, let capacity = Int(capacityText) else {
             showAlert(message: "Por favor, preencha a capacidade do voo")
             return
         }
-
+        
         var pilotCount = 0
         var coPilotCount = 0
         var flightAttendantCount = 0
-
+        
         for crewMember in flightCrew {
             if crewMember is Pilot {
                 pilotCount += 1
@@ -76,33 +107,33 @@ class FlightViewController: UIViewController {
                 flightAttendantCount += 1
             }
         }
-
+        
         if pilotCount != 1 {
             showAlert(message: "É necessário ter exatamente 1 piloto")
             return
         }
-
+        
         if coPilotCount != 1 {
             showAlert(message: "É necessário ter exatamente 1 co-piloto")
             return
         }
-
+        
         if flightAttendantCount > 3 {
             showAlert(message: "O voo só pode ter 3 comissários")
             return
         }
-
-
+        
+        
         let totalPeople = flightPassengers.count + flightCrew.count
         if totalPeople > capacity {
             showAlert(message: "A capacidade do voo foi excedida")
             return
         }
-
-
+        
+        
         let flight = Flight(fromCity: fromCity, toCity: toCity, outboundDate: outboundDate, inboundDate: inboundDate, capacity: capacity, passengers: flightPassengers, crew: flightCrew)
         flights.append(flight)
-
+        
         delegate?.didAddFlight(flight: flight)
         // MARK: popViewController só funciona se showAlert desativado
         //showAlert(message: "Embarque feito com sucesso")
@@ -124,8 +155,6 @@ class FlightViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("Passageiros ao retornar: \(flightPassengers)")
-        print("Tripulantes ao retornar: \(flightCrew)")
     }
     
     func resetFields(){
@@ -153,7 +182,6 @@ class FlightViewController: UIViewController {
 extension FlightViewController: PassengersDelegate {
     func didAddPassengers(_ passengers: [Passenger]) {
         self.flightPassengers = passengers
-        print ("Passageiros: \(flightPassengers)")
     }
 }
 
