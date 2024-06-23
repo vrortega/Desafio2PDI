@@ -301,8 +301,8 @@
                                     <constraint firstAttribute="width" constant="30" id="yHF-dT-idF"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Capacidade de 10 pessoas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvp-V8-a1M">
-                                <rect key="frame" x="55.000000000000014" y="196" width="194.33333333333337" height="19.333333333333343"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Capacidade de 0 pessoa(s)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvp-V8-a1M">
+                                <rect key="frame" x="54.999999999999986" y="196" width="198.66666666666663" height="19.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -512,15 +512,18 @@
                     </view>
                     <navigationItem key="navigationItem" title="Novo Voo" id="Sad-bN-rGg"/>
                     <connections>
+                        <outlet property="capacityLabel" destination="gvp-V8-a1M" id="rWx-xt-Fe2"/>
+                        <outlet property="capacityStepper" destination="R64-we-81o" id="uJh-u6-Gjb"/>
                         <outlet property="crewView" destination="5nm-mo-fQL" id="5Lk-57-6ov"/>
-                        <outlet property="fromCityTf" destination="boB-jd-qka" id="Dq4-8j-56c"/>
-                        <outlet property="inboundDate" destination="OsK-2x-cso" id="jSf-xD-0z3"/>
-                        <outlet property="numberOfCrewLb" destination="n5G-vB-xyj" id="U65-XN-63R"/>
-                        <outlet property="numberOfPassengersLb" destination="eg7-76-TWv" id="s7G-nd-o3a"/>
-                        <outlet property="outboundDate" destination="tN5-5f-ZjF" id="ibS-PX-3S8"/>
+                        <outlet property="fromCityTextField" destination="boB-jd-qka" id="AB9-8E-5yR"/>
+                        <outlet property="inboundDatePicker" destination="OsK-2x-cso" id="8N5-Q2-PWq"/>
+                        <outlet property="inboundSwitch" destination="yZQ-kQ-9q5" id="fKd-f4-cls"/>
+                        <outlet property="numberOfCrewLabel" destination="n5G-vB-xyj" id="ulo-7I-Ei8"/>
+                        <outlet property="numberOfPassengersLabel" destination="eg7-76-TWv" id="Sdt-N9-6WZ"/>
+                        <outlet property="outboundDatePicker" destination="tN5-5f-ZjF" id="adb-xZ-lWl"/>
                         <outlet property="passengersView" destination="EEV-dR-eNY" id="PJ6-Ja-k31"/>
                         <outlet property="takeOffButton" destination="qQY-in-Wwt" id="2XZ-LL-4da"/>
-                        <outlet property="toCityTf" destination="rVf-wI-YWp" id="G34-nh-sdA"/>
+                        <outlet property="toCityTextField" destination="rVf-wI-YWp" id="GZ9-Az-5v4"/>
                         <segue destination="sUL-FE-hsw" kind="show" identifier="showPassengers" id="43A-U3-KCx"/>
                         <segue destination="DbR-xw-Q27" kind="show" identifier="showCrew" id="zKr-af-ycv"/>
                     </connections>

@@ -13,13 +13,15 @@ protocol FlightViewControllerDelegate {
 
 class FlightViewController: UIViewController {
     
-    @IBOutlet weak var fromCityTf: UITextField!
-    @IBOutlet weak var toCityTf: UITextField!
-    @IBOutlet weak var outboundDate: UIDatePicker!
-    @IBOutlet weak var inboundDate: UIDatePicker!
-    @IBOutlet weak var capacityTf: UITextField!
-    @IBOutlet weak var numberOfPassengersLb: UILabel!
-    @IBOutlet weak var numberOfCrewLb: UILabel!
+    @IBOutlet weak var fromCityTextField: UITextField!
+    @IBOutlet weak var toCityTextField: UITextField!
+    @IBOutlet weak var capacityLabel: UILabel!
+    @IBOutlet weak var capacityStepper: UIStepper!
+    @IBOutlet weak var outboundDatePicker: UIDatePicker!
+    @IBOutlet weak var inboundDatePicker: UIDatePicker!
+    @IBOutlet weak var inboundSwitch: UISwitch!
+    @IBOutlet weak var numberOfPassengersLabel: UILabel!
+    @IBOutlet weak var numberOfCrewLabel: UILabel!
     @IBOutlet weak var takeOffButton: UIButton! {
         didSet {
             takeOffButton.layer.cornerRadius = 10
@@ -40,13 +42,13 @@ class FlightViewController: UIViewController {
     
     var flightPassengers: [Passenger] = [] {
         didSet {
-            numberOfPassengersLb.text = "\(flightPassengers.count) passageiros(s) adicionados(s)"
+            numberOfPassengersLabel.text = "\(flightPassengers.count) passageiros(s) adicionados(s)"
         }
     }
     
     var flightCrew: [Any] = [] {
         didSet {
-            numberOfCrewLb.text = "\(flightCrew.count) tripulante(s) adicionado(s)"
+            numberOfCrewLabel.text = "\(flightCrew.count) tripulante(s) adicionado(s)"
         }
     }
     
@@ -54,8 +56,10 @@ class FlightViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fromCityTf.delegate = self
-        toCityTf.delegate = self
+        fromCityTextField.delegate = self
+        toCityTextField.delegate = self
+        
+        capacityStepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
         
         
         let passengersTapGesture = UITapGestureRecognizer(target: self, action: #selector(passengersViewTapped))
@@ -64,6 +68,14 @@ class FlightViewController: UIViewController {
         
         let crewTapGesture = UITapGestureRecognizer(target: self, action: #selector(crewViewTapped))
         crewView.addGestureRecognizer(crewTapGesture)
+    }
+    
+    @objc func stepperValueChanged(_ sender: UIStepper) {
+        updateCapacityLabel()
+    }
+    
+    func updateCapacityLabel() {
+        capacityLabel.text = "Capacidade de \(Int(capacityStepper.value)) pessoas"
     }
     
     @objc func passengersViewTapped() {
@@ -75,24 +87,22 @@ class FlightViewController: UIViewController {
     }
     
     @IBAction func takeOff(_ sender: UIButton) {
-        guard let fromCity = fromCityTf.text, fromCity.count == 3 else {
+        guard let fromCity = fromCityTextField.text, fromCity.count == 3 else {
             showAlert(message: "Por favor, preencha a cidade de origem em apenas 3 caracteres")
             return
         }
         
-        guard let toCity = toCityTf.text, toCity.count == 3 else {
+        guard let toCity = toCityTextField.text, toCity.count == 3 else {
             showAlert(message: "Por favor, preencha a cidade de destino em apenas 3 caracteres")
             return
         }
         
-        let outboundDate = formatDate(date: outboundDate.date)
-        let inboundDate = formatDate(date: inboundDate.date)
+        let outboundDate = formatDate(date: outboundDatePicker.date)
+        let inboundDate = formatDate(date: inboundDatePicker.date)
         
         
-        guard let capacityText = capacityTf.text, !capacityText.isEmpty, let capacity = Int(capacityText) else {
-            showAlert(message: "Por favor, preencha a capacidade do voo")
-            return
-        }
+        let capacity = Int(capacityStepper.value)
+        
         
         var pilotCount = 0
         var coPilotCount = 0
@@ -158,9 +168,10 @@ class FlightViewController: UIViewController {
     }
     
     func resetFields(){
-        fromCityTf.text = ""
-        toCityTf.text = ""
-        capacityTf.text = ""
+        fromCityTextField.text = ""
+        toCityTextField.text = ""
+        capacityStepper.value = 0
+        updateCapacityLabel()
         flightPassengers.removeAll()
         flightCrew.removeAll()
     }
