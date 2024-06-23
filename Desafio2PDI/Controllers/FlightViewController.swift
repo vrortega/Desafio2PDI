@@ -61,6 +61,9 @@ class FlightViewController: UIViewController {
         
         capacityStepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
         
+        inboundSwitch.addTarget(self, action: #selector(inboundSwitchChanged(_:)), for: .valueChanged)
+        inboundSwitch.isOn = false
+        updateInboundDatePicker()
         
         let passengersTapGesture = UITapGestureRecognizer(target: self, action: #selector(passengersViewTapped))
         passengersView.addGestureRecognizer(passengersTapGesture)
@@ -76,6 +79,14 @@ class FlightViewController: UIViewController {
     
     func updateCapacityLabel() {
         capacityLabel.text = "Capacidade de \(Int(capacityStepper.value)) pessoas"
+    }
+    
+    @objc func inboundSwitchChanged(_ sender: UISwitch) {
+        updateInboundDatePicker()
+    }
+    
+    func updateInboundDatePicker() {
+        inboundDatePicker.isEnabled = !inboundSwitch.isOn
     }
     
     @objc func passengersViewTapped() {
@@ -98,7 +109,7 @@ class FlightViewController: UIViewController {
         }
         
         let outboundDate = formatDate(date: outboundDatePicker.date)
-        let inboundDate = formatDate(date: inboundDatePicker.date)
+        let inboundDate = inboundSwitch.isOn ? "" : formatDate(date: inboundDatePicker.date)
         
         
         let capacity = Int(capacityStepper.value)
