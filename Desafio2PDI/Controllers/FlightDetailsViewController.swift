@@ -47,7 +47,7 @@ class FlightDetailsViewController: UIViewController {
         toCityLabel.text = "\(flight.toCity)"
         outboundDateLabel.text = "Ida:\(flight.outboundDate)"
         inboundDateLabel.text = "Volta: \(flight.inboundDate)"
-        capacityLabel.text = "Passageiros | Capacidade: \(flight.capacity)"
+        capacityLabel.text = "Capacidade: \(flight.capacity)"
         
         let passengersText = flight.passengers.map { $0.name }.joined(separator: "\n")
         passengersLabel.text = passengersText

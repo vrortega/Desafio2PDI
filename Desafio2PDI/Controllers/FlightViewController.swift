@@ -78,7 +78,7 @@ class FlightViewController: UIViewController {
     }
     
     func updateCapacityLabel() {
-        capacityLabel.text = "Capacidade de \(Int(capacityStepper.value)) pessoas"
+        capacityLabel.text = "Capacidade de \(Int(capacityStepper.value)) pessoa(s)"
     }
     
     @objc func inboundSwitchChanged(_ sender: UISwitch) {
@@ -156,10 +156,10 @@ class FlightViewController: UIViewController {
         flights.append(flight)
         
         delegate?.didAddFlight(flight: flight)
-        // MARK: popViewController só funciona se showAlert desativado
-        //showAlert(message: "Embarque feito com sucesso")
-        resetFields()
-        self.navigationController?.popViewController(animated: true)
+        showAlert(message: "Embarque feito com sucesso") {
+            self.resetFields()
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     
@@ -193,9 +193,12 @@ class FlightViewController: UIViewController {
         return dateFormatter.string(from: date)
     }
     
-    func showAlert(message: String){
+    func showAlert(message: String, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: "Alerta", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {_ in
+            completion?()
+
+        }))
         present(alert, animated: true, completion: nil)
     }
     
