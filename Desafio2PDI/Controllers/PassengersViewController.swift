@@ -102,17 +102,12 @@ extension PassengersViewController: UITableViewDataSource {
 
 
 extension PassengersViewController: UITableViewDelegate {
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let passenger = passengers[indexPath.row]
-    }
-    
     // deleta passenger na tableview
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             passengers.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             updateView()
-            delegate?.didAddPassengers(passengers)
-        }
+         }
     }
 }

@@ -47,6 +47,7 @@ extension ViewController: UITableViewDataSource {
         
         let flight = flights[indexPath.row]        
         cell.textLabel?.text = "\(flight.fromCity) - \(flight.toCity)"
+        cell.backgroundColor = UIColor.clear
         cell.detailTextLabel?.text = "Ida: \(flight.outboundDate) - Volta: \(flight.inboundDate) | \(flight.passengers.count) passageiro(s)"
 
         return cell
@@ -60,15 +61,14 @@ extension ViewController: UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedFlight = flights[indexPath.row]
-        performSegue(withIdentifier: "showFlightDetails", sender: selectedFlight)
-    }
 }
 
 extension ViewController: UITableViewDelegate {
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedFlight = flights[indexPath.row]
+        performSegue(withIdentifier: "showFlightDetails", sender: selectedFlight)
+    }
 }
 
 extension ViewController: FlightViewControllerDelegate {
